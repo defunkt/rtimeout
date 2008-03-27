@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+$LOAD_PATH.unshift File.dirname(__FILE__) + '/../lib'
+require 'rtimeout'
+
+if ARGV.size < 2
+  STDERR.puts "Usage: $ rtimeout <timeout> <command to run>" 
+  exit! 1
+end
+
+Rtimeout.read(ARGV.shift, ARGV.join(' '))
