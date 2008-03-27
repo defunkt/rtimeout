@@ -12,6 +12,7 @@ begin
     p.url          = "http://github.com/defunkt/rtimeout"
     p.author       = 'Chris Wanstrath'
     p.email        = "chris@ozmm.org"
+    p.dependencies = ['open4 >=0.9.6']
   end
 
 rescue LoadError => boom

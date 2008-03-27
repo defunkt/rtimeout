@@ -1,8 +1,11 @@
+require 'rubygems'
+require 'open4'
+
 class Rtimeout
   def initialize(timeout, command)
     @timeout = timeout.to_i
     @command = command
-    @io = IO.popen(command, "r+")
+    @pid, _, @io, _ = Open4.popen4(command)
   end
 
   def read
@@ -12,7 +15,10 @@ class Rtimeout
       $stdout.print out
     end
 
-    $stderr.puts "rtimeout: Command `#{@command}` timed out." if result.nil?
+    if result.nil?
+      system "kill -9 #{@pid}"
+      $stderr.puts "rtimeout: Command `#{@command}` timed out." 
+    end
   end
 
   def self.read(timeout, command)
