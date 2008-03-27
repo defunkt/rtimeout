@@ -1,6 +1,4 @@
 class Rtimeout
-  class TimeoutError < RuntimeError; end
-
   def initialize(timeout, command)
     @timeout = timeout.to_i
     @command = command
